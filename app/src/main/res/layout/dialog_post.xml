@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#FD00EDF4"
     android:layout_height="match_parent">
@@ -9,15 +9,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_margin="@dimen/_10sdp"
-        android:background="#304FFE"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_dialog_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="casual"
+            android:fontFamily="@font/berkshire_swash"
             android:hint="Ism"
-            android:background="@color/white"
+
             android:inputType="textAutoComplete"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -26,14 +25,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_margin="@dimen/_10sdp"
-        android:background="#304FFE"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_dialog_last_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fontFamily="casual"
+
+            android:fontFamily="@font/berkshire_swash"
             android:hint="Familya"
             android:inputType="textAutoComplete"
             android:textColor="@color/black"
@@ -44,15 +42,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_margin="@dimen/_10sdp"
-        android:background="#304FFE"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_dialog_manzil"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="casual"
+            android:fontFamily="@font/berkshire_swash"
             android:hint="Manzil"
-            android:background="@color/white"
+
             android:inputType="textAutoComplete"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -61,15 +58,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:background="#304FFE"
         android:layout_margin="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_dialog_tel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="casual"
-            android:background="@color/white"
+            android:fontFamily="@font/berkshire_swash"
+
             android:hint="Tel"
             android:inputType="phone"
             android:textColor="@color/black"
@@ -78,21 +74,31 @@
 
 <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-    android:background="#304FFE"
     android:layout_margin="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_dialog_summa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="casual"
-            android:background="@color/white"
-
+            android:fontFamily="@font/berkshire_swash"
+            android:selectAllOnFocus="true"
             android:hint="Summa"
             android:inputType="number"
             android:textColor="@color/black"
             android:textStyle="bold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_dialog_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        android:paddingVertical="@dimen/_10sdp"
+        android:backgroundTint="@color/white"
+        app:strokeWidth="@dimen/_1sdp"
+        app:strokeColor="#304FFE"
+        android:text="Save"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/berkshire_swash"/>
 </LinearLayout>

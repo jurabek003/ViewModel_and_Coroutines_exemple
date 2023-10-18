@@ -7,11 +7,12 @@ import kotlinx.coroutines.launch
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.CLientPost
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.GetClients
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.GetClientsItem
+import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.PostClientItem
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.network.ApiClient
 
 class ViewModel:ViewModel() {
     val  liveDataGetClients=MutableLiveData<GetClients>()
-    val liveDataPostClient=MutableLiveData<GetClientsItem>()
+    val liveDataPostClient=MutableLiveData<PostClientItem>()
 
 
         val apiServis=ApiClient.getApiServis()
@@ -23,9 +24,9 @@ class ViewModel:ViewModel() {
         }
         return liveDataGetClients
     }
-    fun postClient(getClientsItem: GetClientsItem?):MutableLiveData<GetClientsItem>{
+    fun postClient(postClientItem: PostClientItem):MutableLiveData<PostClientItem>{
         GlobalScope.launch {
-            val postUser= getClientsItem?.let { apiServis.postClient(it) }
+            val postUser= apiServis.postClient(postClientItem)
             liveDataPostClient.postValue(postUser)
         }
         return liveDataPostClient
