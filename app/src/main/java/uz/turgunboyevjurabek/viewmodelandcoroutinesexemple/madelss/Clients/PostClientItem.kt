@@ -1,15 +1,11 @@
-package uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madels
+package uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients
 
 
 import com.google.gson.annotations.SerializedName
 
-data class GetClientsItem(
-    @SerializedName("client_rasm")
-    val clientRasm: String,
+data class PostClientItem(
     @SerializedName("fam")
     val fam: String,
-    @SerializedName("id")
-    val id: Int,
     @SerializedName("ism")
     val ism: String,
     @SerializedName("manzil")

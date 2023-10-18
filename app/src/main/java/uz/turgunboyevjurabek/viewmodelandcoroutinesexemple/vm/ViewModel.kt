@@ -4,22 +4,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madels.GetClients
+import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.CLientPost
+import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.GetClients
+import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.GetClientsItem
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.network.ApiClient
 
 class ViewModel:ViewModel() {
-    val  liveData=MutableLiveData<GetClients>()
-    init {
-        GlobalScope.launch {
-            val apiServis=ApiClient.getApiServis()
-            val users = apiServis.getAllClients()
-            liveData.postValue(users)
-        }
+    val  liveDataGetClients=MutableLiveData<GetClients>()
+    val liveDataPostClient=MutableLiveData<GetClientsItem>()
 
-    }
+
+        val apiServis=ApiClient.getApiServis()
 
     fun getAllClients():MutableLiveData<GetClients>{
-        return liveData
+        GlobalScope.launch {
+            val users = apiServis.getAllClients()
+            liveDataGetClients.postValue(users)
+        }
+        return liveDataGetClients
+    }
+    fun postClient(getClientsItem: GetClientsItem?):MutableLiveData<GetClientsItem>{
+        GlobalScope.launch {
+            val postUser= getClientsItem?.let { apiServis.postClient(it) }
+            liveDataPostClient.postValue(postUser)
+        }
+        return liveDataPostClient
     }
 
 }
