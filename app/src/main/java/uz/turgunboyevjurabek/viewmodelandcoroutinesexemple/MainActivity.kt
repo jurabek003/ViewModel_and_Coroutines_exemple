@@ -2,11 +2,11 @@ package uz.turgunboyevjurabek.viewmodelandcoroutinesexemple
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.adapter.RvAdapter
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.databinding.ActivityMainBinding
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.vm.ViewModel
-
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var rvAdapter: RvAdapter
@@ -16,11 +16,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
          viewModel=ViewModelProvider(this).get(ViewModel::class.java)
+
          viewModel.getAllClients().observe(this){it->
              rvAdapter=RvAdapter(it)
              binding.rv.adapter=rvAdapter
              rvAdapter.notifyDataSetChanged()
         }
 
+        postClientFun()
+
+
     }
+
+    private fun postClientFun() {
+        viewModel.postClient(null).observe(this){it->
+            Toast.makeText(this, "Saqlandi", Toast.LENGTH_SHORT).show()
+            rvAdapter.notifyDataSetChanged()
+        }
+    }
+
 }
+
