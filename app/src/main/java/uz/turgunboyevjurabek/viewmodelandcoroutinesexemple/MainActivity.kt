@@ -1,7 +1,10 @@
 package uz.turgunboyevjurabek.viewmodelandcoroutinesexemple
 
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.content.Context
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -10,6 +13,7 @@ import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.databinding.ActivityM
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.databinding.DialogPostBinding
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.madelss.Clients.PostClientItem
 import uz.turgunboyevjurabek.viewmodelandcoroutinesexemple.vm.ViewModel
+
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var rvAdapter: RvAdapter
@@ -18,13 +22,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-         viewModel=ViewModelProvider(this).get(ViewModel::class.java)
+        aboutNetwork()
 
-        getAllClients()
-
-        binding.btnFloating.setOnClickListener {
-            dialogShow()
+        binding.imgRefresh.setOnClickListener{
+            aboutNetwork()
         }
+
+    }
+
+    private fun aboutNetwork() {
+        binding.progressCircular.visibility=View.VISIBLE
+        if (isNetworkAvailable(this)) {
+
+            setipFabButtons()
+           network()
+
+        }else{
+            binding.thtFail.visibility=View.VISIBLE
+            binding.btnFloating.visibility=View.GONE
+            binding.imgRefresh.visibility=View.VISIBLE
+            binding.progressCircular.visibility=View.GONE
+        }
+    }
+
+    private fun setipFabButtons() {
+        binding.btnFloating.shrink()
 
     }
 
@@ -67,6 +89,30 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+    private fun network(){
+        binding.thtFail.visibility=View.GONE
+        binding.imgRefresh.visibility=View.GONE
+        binding.progressCircular.visibility=View.GONE
 
+        viewModel=ViewModelProvider(this).get(ViewModel::class.java)
+        getAllClients()
+
+        binding.btnFloating.setOnClickListener {
+
+            if (binding.btnFloating.isExtended){
+                binding.btnFloating.shrink()
+            }else{
+                binding.btnFloating.extend()
+            }
+
+            dialogShow()
+        }
+    }
 }
+
 
